@@ -36,7 +36,8 @@ $tablet: map.get($themes, "default", "globals", "breakpoints", "tablet");
 /* ---- Menu des services MirAI ------------------------------------------------------ */
 
 .mirai-services {
-  position: relative;
+  // Pas de `position: relative` : plus rien n'est positionné par rapport à ce bloc,
+  // le panneau ayant quitté le flux pour `document.body`.
   display: flex;
   align-items: center;
 
@@ -60,26 +61,6 @@ $tablet: map.get($themes, "default", "globals", "breakpoints", "tablet");
     &:focus-visible {
       outline: 2px solid #0a76f6;
       outline-offset: 2px;
-    }
-  }
-
-  &__panneau {
-    position: absolute;
-    top: calc(100% + 8px);
-    right: 0;
-    z-index: 1000;
-    width: 320px;
-    max-width: calc(100vw - 2rem);
-    padding: 16px;
-    background: #ffffff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 6px 24px rgb(0 0 0 / 12%);
-    color: #161616;
-    text-align: left;
-
-    &[hidden] {
-      display: none;
     }
   }
 
@@ -166,6 +147,26 @@ $tablet: map.get($themes, "default", "globals", "breakpoints", "tablet");
 
   // Même règle que la gaufre qu'il remplace : l'en-tête n'a pas la place sur mobile.
   @media (max-width: $tablet) {
+    display: none;
+  }
+}
+
+/* Le panneau est posé sur `document.body` — il n'est donc PAS imbriqué dans
+   `.mirai-services`. Sa position vient du composant, calculée depuis le bouton. */
+.mirai-services__panneau {
+  position: fixed;
+  z-index: 1100; // au-dessus du panneau latéral mobile du kit d'interface (999)
+  width: 320px;
+  max-width: calc(100vw - 2rem);
+  padding: 16px;
+  background: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 6px 24px rgb(0 0 0 / 12%);
+  color: #161616;
+  text-align: left;
+
+  &[hidden] {
     display: none;
   }
 }
