@@ -1,23 +1,19 @@
 import { useEffect, useRef, useState } from "react";
+import { useConfig } from "@/features/config/ConfigProvider";
 import { MarianneFlag } from "./MinistereInterieurLogo";
-import {
-  AVERTISSEMENT_BETA,
-  DOMAINE_MIRAI,
-  SERVICES_MIRAI,
-  SERVICE_COURANT,
-  serviceCourant,
-} from "./services";
+import { lireMenu, serviceCourant } from "./services";
 
 /**
- * Le menu des services MirAI, à la place de la gaufre LaSuite.
+ * Le menu des services voisins, à la place de la gaufre LaSuite.
  *
- * Même contenu et même comportement que l'encart du socle : la liste des autres
- * services, « vous êtes ici » sur celui qu'on regarde, « bientôt » sur ceux qui ne sont
- * pas ouverts, l'avertissement bêta au survol ET dans le panneau, fermeture par Échap.
+ * Même contenu et même comportement que l'encart du socle : la liste des autres services,
+ * « vous êtes ici » sur celui qu'on regarde, « bientôt » sur ceux qui ne sont pas ouverts,
+ * l'avertissement au survol ET dans le panneau — le survol n'existe pas au doigt —, et la
+ * fermeture par Échap comme par clic extérieur.
  *
  * Ce n'est PAS l'encart du socle : c'est une réimplémentation, le temps que l'habillage
- * commun devienne un fichier autonome que Drive puisse charger comme les autres. La
- * liste des services est donc dupliquée — voir l'avertissement en tête de `services.ts`.
+ * commun devienne un fichier autonome que Drive puisse charger comme les autres. Ce qu'il
+ * affiche, en revanche, ne vit pas ici : voir `services.ts`.
  */
 
 const GrilleIcon = () => (
@@ -39,15 +35,20 @@ const GrilleIcon = () => (
 );
 
 export const MiraiServicesMenu = () => {
+  const { config } = useConfig();
+  const menu = lireMenu(config);
+
   const [ouvert, setOuvert] = useState(false);
-  const [ici, setIci] = useState(SERVICE_COURANT);
+  const [ici, setIci] = useState(menu?.current ?? "");
   const conteneur = useRef<HTMLDivElement>(null);
 
   // Le sous-domaine n'existe pas au rendu serveur : on le lit une fois monté, sinon le
   // HTML rendu côté serveur et celui du navigateur ne concordent pas.
   useEffect(() => {
-    setIci(serviceCourant(window.location.hostname));
-  }, []);
+    if (menu) {
+      setIci(serviceCourant(menu, window.location.hostname));
+    }
+  }, [menu]);
 
   useEffect(() => {
     if (!ouvert) {
@@ -71,6 +72,11 @@ export const MiraiServicesMenu = () => {
     };
   }, [ouvert]);
 
+  // Pas de liste configurée, pas de menu : mieux vaut rien qu'une liste inventée.
+  if (!menu) {
+    return null;
+  }
+
   return (
     <div className="mirai-services" ref={conteneur}>
       <button
@@ -79,8 +85,8 @@ export const MiraiServicesMenu = () => {
         aria-haspopup="true"
         aria-expanded={ouvert}
         aria-controls="mirai-services-panneau"
-        aria-label="Les autres services MirAI"
-        title={AVERTISSEMENT_BETA}
+        aria-label="Les autres services"
+        title={menu.warning || undefined}
         onClick={() => setOuvert((o) => !o)}
       >
         <GrilleIcon />
@@ -102,42 +108,46 @@ export const MiraiServicesMenu = () => {
           </div>
         </div>
 
-        <p className="mirai-services__avertissement">
-          <b>MirAI Next Beta</b> — {AVERTISSEMENT_BETA}
-        </p>
+        {menu.warning && (
+          <p className="mirai-services__avertissement">{menu.warning}</p>
+        )}
 
         <div className="mirai-services__titre">Les autres services</div>
 
         <ul className="mirai-services__liste">
-          {SERVICES_MIRAI.map((service) => {
-            if (service.hote === ici) {
+          {menu.services.map((service) => {
+            if (service.host === ici) {
               return (
-                <li key={service.hote}>
+                <li key={service.host}>
                   <span className="mirai-services__inactif" aria-current="page">
-                    {service.nom}
+                    {service.name}
                     <span className="mirai-services__note">vous êtes ici</span>
                   </span>
                 </li>
               );
             }
-            if (!service.enLigne) {
+            if (service.online === false) {
               return (
-                <li key={service.hote}>
+                <li key={service.host}>
                   <span className="mirai-services__inactif">
-                    {service.nom}
+                    {service.name}
                     <span className="mirai-services__note">bientôt</span>
                   </span>
                 </li>
               );
             }
             return (
-              <li key={service.hote}>
+              <li key={service.host}>
                 <a
-                  href={`https://${service.hote}.${DOMAINE_MIRAI}/`}
+                  href={`https://${service.host}.${menu.domain}/`}
                   role="menuitem"
                 >
-                  {service.nom}
-                  <span className="mirai-services__note">{service.quoi}</span>
+                  {service.name}
+                  {service.about && (
+                    <span className="mirai-services__note">
+                      {service.about}
+                    </span>
+                  )}
                 </a>
               </li>
             );

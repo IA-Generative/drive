@@ -1041,6 +1041,13 @@ class Base(Configuration):
     FRONTEND_HELP_MENU_CONFIG = values.DictValue(
         {}, environ_name="FRONTEND_HELP_MENU_CONFIG", environ_prefix=None
     )
+    # Menu of sibling services shown in place of the LaSuite waffle. Empty by default:
+    # the list belongs to a deployment, not to the code, and this repository is public.
+    # Shape: {"domain": str, "current": str, "warning": str,
+    #         "services": [{"name", "host", "about", "online"}]}
+    FRONTEND_MIRAI_SERVICES = values.DictValue(
+        {}, environ_name="FRONTEND_MIRAI_SERVICES", environ_prefix=None
+    )
     FRONTEND_HIDE_GAUFRE = values.BooleanValue(
         default=False, environ_name="FRONTEND_HIDE_GAUFRE", environ_prefix=None
     )

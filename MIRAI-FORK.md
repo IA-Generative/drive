@@ -72,12 +72,22 @@ son interface ne doit pas prétendre le contraire.
   traduction, et ne promet plus la synchronisation avec « toutes les applications
   LaSuite ».
 
-> **La liste des services est un miroir, et c'est une dette.** Elle vit dans
-> `features/mirai/services.ts` alors que la liste qui fait foi est celle du socle. Deux
-> listes à tenir synchronisées finissent toujours par diverger. Ce doublon n'existe que
-> parce que Drive ne sait pas encore charger le fichier d'habillage commun ; le jour où ce
-> fichier devient autonome, `features/mirai/` disparaît au profit de lui. C'est écrit dans
-> le prompt de portage archivé côté privé.
+> **Ce que le fork duplique, et ce qu'il ne duplique plus.** La *liste* des services ne
+> vit pas ici : elle arrive par `FRONTEND_MIRAI_SERVICES`, un réglage du backend
+> renseigné au déploiement. Ce dépôt est public, et la liste nomme les sous-domaines de
+> tous les services — y compris ceux qui ne sont pas encore ouverts. Réglage absent : pas
+> de menu, et rien de cassé.
+>
+> Ce qui reste dupliqué, c'est le *mécanisme* : `MiraiServicesMenu.tsx` réimplémente en
+> React ce que le socle fait en JavaScript autonome. C'est la dette que le prompt de
+> portage redoutait, et elle est assumée le temps que l'habillage commun devienne un
+> fichier que Drive puisse charger comme les autres — ce jour-là, `features/mirai/`
+> disparaît au profit de lui.
+>
+> **Le réglage est un littéral Python, pas du JSON** : la configuration de Drive le lit
+> avec `ast.literal_eval`, donc `True` et `False`, jamais `true` et `false`. Un booléen
+> minuscule fait échouer la lecture, le réglage retombe à vide, et le menu disparaît sans
+> que rien ne dise pourquoi.
 
 ## Remonter sur une nouvelle version de l'amont
 
@@ -103,13 +113,16 @@ git diff main..HEAD --stat
 | `MIRAI-FORK.md` | ce fichier |
 | `.gitignore` | `deploy/` hors du dépôt public |
 | `src/backend/core/api/utils.py` | correctif SigV4 |
+| `src/backend/drive/settings.py` | réglage `FRONTEND_MIRAI_SERVICES` |
+| `src/backend/core/api/viewsets.py` | le réglage exposé par `/api/v1.0/config/` |
 | `.../header/MiraiBadge.tsx` | le badge (nouveau) |
 | `.../header/Header.tsx` | montage du badge |
 | `.../header/index.scss` | styles du badge |
 | `pages/index.tsx` | bloc-marque + badge sur l'accueil |
 | `pages/index.scss` | règle mobile du bloc-marque |
-| `.../gaufre/Gaufre.tsx` | menu MirAI à la place de la gaufre |
-| `features/mirai/` | menu, bloc-marque, liste des services (nouveau) |
+| `.../gaufre/Gaufre.tsx` | menu des services à la place de la gaufre |
+| `features/mirai/` | menu, bloc-marque, lecture du réglage (nouveau) |
+| `features/drivers/types.ts` | type du réglage |
 | `features/i18n/translations.json` | texte d'accueil, 3 langues |
 | `styles/globals.scss` | branchement de `mirai.scss` |
 
@@ -129,12 +142,6 @@ c'est là qu'il faudra retravailler — pas ailleurs.
   à ce moment-là. La décision n'est pas prise.
 - **Le menu MirAI est une réimplémentation**, pas l'encart du socle. Voir l'encadré
   ci-dessus : c'est un état transitoire assumé, pas une cible.
-- **La liste des services est publiée avec ce dépôt.** Elle nomme les sous-domaines de
-  tous les services MirAI, y compris ceux marqués « bientôt » — donc une partie de la
-  feuille de route. Les mêmes noms sont déjà servis publiquement par l'habillage du socle,
-  et le navigateur doit de toute façon les recevoir pour afficher des liens ; mais si ce
-  n'est pas voulu, la liste doit sortir du code et arriver par la configuration au
-  démarrage. À trancher avant le prochain push.
 - **Graphie.** « MirAI » depuis le 2026-08-22, aligné sur le reste de la plateforme. Une
   version antérieure du badge écrivait « MiRAI » : si ce rendu traîne encore quelque part,
   c'est lui qu'il faut corriger.
