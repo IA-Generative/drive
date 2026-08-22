@@ -72,6 +72,15 @@ son interface ne doit pas prétendre le contraire.
   traduction, et ne promet plus la synchronisation avec « toutes les applications
   LaSuite ».
 
+> **Tout ce qui doit flotter au-dessus de la page doit quitter la barre du haut.**
+> `.c__main-layout__header` est en `position: fixed` sans `z-index` : un élément fixe crée
+> un contexte d'empilement de toute façon, et tout ce qui est peint dedans reste au
+> niveau 0 de la racine — le contenu de la page, qui vient après dans le document, passe
+> par-dessus. Aucune valeur de `z-index` n'y change rien : elle ne classe qu'à l'intérieur
+> du contexte. Le panneau du menu est donc rendu dans `document.body` par un portail, et
+> positionné depuis le rectangle du bouton. Toute future incrustation ancrée à la barre
+> rencontrera le même mur.
+
 > **Ce que le fork duplique, et ce qu'il ne duplique plus.** La *liste* des services ne
 > vit pas ici : elle arrive par `FRONTEND_MIRAI_SERVICES`, un réglage du backend
 > renseigné au déploiement. Ce dépôt est public, et la liste nomme les sous-domaines de

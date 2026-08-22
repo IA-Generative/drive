@@ -169,4 +169,11 @@ $tablet: map.get($themes, "default", "globals", "breakpoints", "tablet");
   &[hidden] {
     display: none;
   }
+
+  // Le bouton disparaît sous le breakpoint tablette ; le panneau vivant désormais sur
+  // `document.body`, il ne suit plus son parent. Sans cette règle, un menu ouvert puis
+  // une fenêtre rétrécie laisserait un panneau flottant sans bouton pour le refermer.
+  @media (max-width: $tablet) {
+    display: none;
+  }
 }
