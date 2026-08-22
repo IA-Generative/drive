@@ -153,9 +153,18 @@ procédures d'exploitation — et le prompt de portage de l'encart vivent dans l
 d'infrastructure. `deploy/` est gitignoré pour cette raison : rien de son contenu ne doit
 être commité ici.
 
-> **Avant la prochaine livraison.** `src/helm/drive/Chart.yaml` est passé de `0.18.0` à
-> `0.21.1` avec cette remontée, alors que la release en service est encore en `0.18.0`. Le
-> script de déploiement compare les deux versions et refusera d'appliquer tant que l'écart
-> n'est pas traité. Ce n'est pas une régression : la prochaine livraison est une vraie
-> montée de version de chart — migrations, revue du diff, retour arrière préparé — et non
-> un simple changement de tag d'image.
+> **Ce que porte la release en service.** Le chart déployé est **déjà** en `0.21.1` — le
+> même que celui de ce fork depuis la remontée. Rien à rattraper de ce côté : la prochaine
+> livraison est un changement d'image, pas une montée de chart.
+>
+> **Les images ne se tirent pas de l'amont.** Le correctif SigV4 est un correctif de
+> *backend* : l'image publique ne le porte pas. Les deux images — backend et frontend —
+> sont construites depuis le même commit de ce fork, et épinglées à un tag qui suit la
+> version d'amont, jamais `latest`. La recette, le registre et la procédure vivent dans le
+> dépôt privé d'infrastructure ; ce fork n'en est que la source.
+>
+> **Ne jamais réécrire un tag d'image déjà servi.** Avec `imagePullPolicy: IfNotPresent`,
+> les nœuds qui l'ont en cache gardent l'ancienne image pendant que les nœuds neufs tirent
+> la nouvelle : deux versions servent en même temps, la base suit le schéma de l'une, et
+> l'application répond une fois sur deux. C'est arrivé, ça a coûté des semaines à voir, et
+> une réécriture de tag suffit à le refaire. Un contenu nouveau prend un tag nouveau.
