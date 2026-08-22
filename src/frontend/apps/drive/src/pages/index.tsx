@@ -4,9 +4,10 @@ import { useTranslation } from "next-i18next";
 import { Hero, Footer, MainLayout, HomeGutter } from "@gouvfr-lasuite/ui-kit";
 import { login, useAuth } from "@/features/auth/Auth";
 import { useEffect, useState } from "react";
-import logoGouv from "@/assets/logo-gouv.svg";
+import { MinistereInterieurLogo } from "@/features/mirai/MinistereInterieurLogo";
 import banner from "@/assets/home/banner.png";
 import { HeaderRight } from "@/features/layouts/components/header/Header";
+import { MiraiBadge } from "@/features/layouts/components/header/MiraiBadge";
 import {
   addToast,
   Toaster,
@@ -154,8 +155,9 @@ const HomePageLayout = ({ children }: { children: React.ReactNode }) => {
       leftPanelFooter={<LeftPanelFooter />}
       icon={
         <div className="drive__header__left">
-          <img src={logoGouv.src} alt="" />
+          <MinistereInterieurLogo />
           <div className="drive__header__logo" />
+          <MiraiBadge />
           <Feedback />
         </div>
       }

@@ -1,28 +1,22 @@
-import { LaGaufreV2 } from "@gouvfr-lasuite/ui-kit";
-import {
-  removeQuotes,
-  useCunninghamTheme,
-} from "../../cunningham/useCunninghamTheme";
 import { useConfig } from "@/features/config/ConfigProvider";
-import { useAppContext } from "@/pages/_app";
+import { MiraiServicesMenu } from "@/features/mirai/MiraiServicesMenu";
 
+/**
+ * La gaufre LaSuite listait Tchap, Docs, Visio, Grist… — les services de LaSuite, dont
+ * cette instance ne fait pas partie. Elle est remplacée par le menu des services MirAI.
+ *
+ * Le remplacement se fait ICI plutôt que sur chaque appelant : l'en-tête et l'explorateur
+ * montent tous deux ce composant, et tout appelant futur suivra sans y penser.
+ *
+ * Le widget d'origine se chargeait depuis un domaine externe (`lagaufre.js`) : le menu
+ * MirAI, lui, est servi par l'application elle-même. Une dépendance réseau de moins.
+ */
 export const Gaufre = () => {
   const { config } = useConfig();
-  const { theme: themeName } = useAppContext();
-  const hideGaufre = config?.FRONTEND_HIDE_GAUFRE;
-  const theme = useCunninghamTheme();
-  const widgetPath = removeQuotes(theme.components.gaufre.widgetPath);
-  const apiUrl = removeQuotes(theme.components.gaufre.apiUrl);
 
-  if (hideGaufre) {
+  if (config?.FRONTEND_HIDE_GAUFRE) {
     return null;
   }
 
-  return (
-    <LaGaufreV2
-      widgetPath={widgetPath}
-      apiUrl={apiUrl}
-      showMoreLimit={themeName.includes("anct") ? 100 : 6}
-    />
-  );
+  return <MiraiServicesMenu />;
 };

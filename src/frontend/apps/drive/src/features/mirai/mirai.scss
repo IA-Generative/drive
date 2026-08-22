@@ -1,0 +1,171 @@
+@use "sass:map";
+@use "@/styles/cunningham-tokens-sass" as *;
+
+$tablet: map.get($themes, "default", "globals", "breakpoints", "tablet");
+
+/* ---- Bloc-marque du ministère de l'Intérieur -------------------------------------- */
+
+.mirai-ministere {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  color: #161616;
+  user-select: none;
+
+  &__flag {
+    display: block;
+  }
+
+  &__wordmark {
+    margin-top: 3px;
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+  }
+
+  &__devise {
+    margin-top: 3px;
+    font-size: 7px;
+    font-style: italic;
+    line-height: 8.5px;
+  }
+}
+
+/* ---- Menu des services MirAI ------------------------------------------------------ */
+
+.mirai-services {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  &__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    background: none;
+    border: 0;
+    border-radius: 4px;
+    color: #3a3a3a;
+    cursor: pointer;
+
+    &:hover {
+      background: #ededed;
+    }
+
+    &:focus-visible {
+      outline: 2px solid #0a76f6;
+      outline-offset: 2px;
+    }
+  }
+
+  &__panneau {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    z-index: 1000;
+    width: 320px;
+    max-width: calc(100vw - 2rem);
+    padding: 16px;
+    background: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 6px 24px rgb(0 0 0 / 12%);
+    color: #161616;
+    text-align: left;
+
+    &[hidden] {
+      display: none;
+    }
+  }
+
+  &__entete {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  &__flag {
+    flex-shrink: 0;
+  }
+
+  &__rf {
+    display: flex;
+    flex-direction: column;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1.25;
+    text-transform: uppercase;
+  }
+
+  &__ministere {
+    font-weight: 400;
+    text-transform: none;
+  }
+
+  &__avertissement {
+    margin: 12px 0 0;
+    font-size: 11px;
+    line-height: 1.4;
+    color: #666;
+  }
+
+  &__titre {
+    margin-top: 16px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #eee;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #666;
+  }
+
+  &__liste {
+    margin: 4px 0 0;
+    padding: 0;
+    list-style: none;
+
+    li {
+      margin: 0;
+    }
+
+    a,
+    .mirai-services__inactif {
+      display: flex;
+      flex-direction: column;
+      padding: 7px 8px;
+      border-radius: 4px;
+      font-size: 13px;
+      font-weight: 600;
+      line-height: 1.2;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    a:hover {
+      background: #f2f6ff;
+    }
+  }
+
+  &__inactif {
+    color: #929292;
+    cursor: default;
+  }
+
+  &__note {
+    margin-top: 2px;
+    font-size: 11px;
+    font-weight: 400;
+    color: #666;
+  }
+
+  // Même règle que la gaufre qu'il remplace : l'en-tête n'a pas la place sur mobile.
+  @media (max-width: $tablet) {
+    display: none;
+  }
+}

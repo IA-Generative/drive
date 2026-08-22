@@ -123,7 +123,7 @@
       },
       "home": {
         "title": "Easy storage and sharing",
-        "subtitle": "A modern, high-performance drive built for French public teams. Sovereign hosting in France, strong security, and seamless sync with all LaSuite apps. On par with the market’s best—without the data trade-offs.",
+        "subtitle": "This instance is operated by the French Ministry of the Interior as part of MirAI. A modern, high-performance drive for public teams: sovereign hosting in France, strong security, and direct access to the other MirAI services.",
         "main_button": "Sign in",
         "more": "Learn more"
       },
@@ -832,7 +832,7 @@
       },
       "home": {
         "title": "Stocker et partager facilement",
-        "subtitle": "Un stockage performant et sécurisé pour les équipes publiques françaises. Hébergement en France, sécurité renforcée, et synchronisation fluide avec toutes les applications LaSuite. A la hauteur des meilleurs du marché, sans les compromis de données.",
+        "subtitle": "Cette instance est gérée par le ministère de l’Intérieur dans le cadre de MirAI. Un stockage performant et sécurisé pour les équipes publiques : hébergement en France, sécurité renforcée, et accès direct aux autres services MirAI.",
         "main_button": "Se connecter",
         "more": "En savoir plus"
       },
@@ -1541,7 +1541,7 @@
       },
       "home": {
         "title": "Eenvoudige opslag en delen",
-        "subtitle": "Een modern, hoogwaardig platform voor bestandenopslag ontworpen voor Franse publieke teams. Soevereine hosting in Frankrijk, sterke beveiliging en naadloze synchronisatie met alle LaSuite-apps. Even goed als de beste op de markt — zonder concessies op het gebied van data.",
+        "subtitle": "Deze instantie wordt beheerd door het Franse ministerie van Binnenlandse Zaken in het kader van MirAI. Een modern, hoogwaardig platform voor bestandsopslag voor publieke teams: soevereine hosting in Frankrijk, sterke beveiliging en directe toegang tot de andere MirAI-diensten.",
         "main_button": "Inloggen",
         "more": "Meer informatie"
       },
