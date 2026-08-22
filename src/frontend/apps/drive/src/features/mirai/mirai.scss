@@ -33,7 +33,35 @@ $tablet: map.get($themes, "default", "globals", "breakpoints", "tablet");
   }
 }
 
-/* ---- Menu des services MirAI ------------------------------------------------------ */
+/* ---- Menu des services -------------------------------------------------------------
+   Repris de l'habillage du socle (apps/socle-owui/base/habillage/custom.css dans le
+   dépôt d'infrastructure), à l'identique : mêmes valeurs, mêmes proportions, mêmes
+   couleurs. L'encart doit être LE MÊME d'une application à l'autre — un utilisateur qui
+   passe de l'une à l'autre ne doit pas avoir à réapprendre où il est.
+
+   Les variables reprennent les noms du socle, préfixées : quand l'habillage commun
+   deviendra un fichier autonome que Drive chargera, la correspondance sera lisible.
+
+   Un seul écart assumé : le socle bascule en sombre sur `html.dark`, convention
+   d'OpenWebUI. Drive n'expose pas de thème sombre — la configuration le fixe à
+   `dsfr-light`. Habiller un menu en sombre dans une application claire serait pire que
+   de ne pas le faire. À reprendre le jour où Drive aura un thème sombre. */
+
+:root {
+  --mirai-bleu: #000091;
+  --mirai-rouge: #e1000f;
+  --mirai-surface: #ffffff;
+  --mirai-encre: #161616;
+  --mirai-encre-2: #666666;
+  --mirai-ligne: #dddddd;
+  --mirai-survol: #f6f6f6;
+  --mirai-beta-fond: #fff4e3;
+  --mirai-beta-encre: #6b4700;
+  --mirai-beta-ligne: #e8d5b0;
+  --mirai-pastille-fond: #ffffff;
+  --mirai-pastille-ligne: #d1d5db;
+  --mirai-pastille-encre: #374151;
+}
 
 .mirai-services {
   // Pas de `position: relative` : plus rien n'est positionné par rapport à ce bloc,
@@ -44,105 +72,165 @@ $tablet: map.get($themes, "default", "globals", "breakpoints", "tablet");
   &__button {
     display: flex;
     align-items: center;
-    justify-content: center;
-    width: 32px;
-    height: 32px;
-    padding: 0;
-    background: none;
-    border: 0;
-    border-radius: 4px;
-    color: #3a3a3a;
+    gap: 7px;
+    height: 30px;
+    padding: 0 8px;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    color: var(--mirai-encre-2);
+    line-height: 1;
     cursor: pointer;
 
-    &:hover {
-      background: #ededed;
+    &:hover,
+    &[aria-expanded="true"] {
+      background: var(--mirai-survol);
+      border-color: var(--mirai-ligne);
     }
 
     &:focus-visible {
-      outline: 2px solid #0a76f6;
+      outline: 2px solid var(--mirai-bleu);
       outline-offset: 2px;
     }
+
+    > * {
+      flex: none;
+    }
+  }
+
+  // La pastille reprend la base du badge « by MirAI » de l'en-tête — pilule blanche,
+  // bord fin, 11 px, coins arrondis — et y applique les couleurs de MirAI : le bleu sur
+  // le nom, le blanc pour le fond, le rouge sur « Beta ». Le tricolore se lit dans le
+  // mot, pas à côté. Pas de capitales forcées : « MirAI » a sa casse propre.
+  &__pastille {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    height: 22px;
+    padding: 0 8px;
+    background: var(--mirai-pastille-fond);
+    border: 1px solid var(--mirai-pastille-ligne);
+    border-radius: 10px;
+    color: var(--mirai-pastille-encre);
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: 0.01em;
+    white-space: nowrap;
+    user-select: none;
+  }
+
+  &__nom {
+    font-style: italic;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: var(--mirai-bleu);
+  }
+
+  &__beta {
+    font-weight: 700;
+    color: var(--mirai-rouge);
   }
 
   &__entete {
     display: flex;
     align-items: center;
     gap: 10px;
-  }
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--mirai-ligne);
 
-  &__flag {
-    flex-shrink: 0;
+    > svg {
+      flex: none;
+    }
   }
 
   &__rf {
-    display: flex;
-    flex-direction: column;
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 700;
+    letter-spacing: 0.06em;
     line-height: 1.25;
     text-transform: uppercase;
+    color: var(--mirai-encre);
   }
 
   &__ministere {
+    display: block;
+    margin-top: 2px;
+    font-size: 10.5px;
     font-weight: 400;
+    letter-spacing: 0;
     text-transform: none;
+    color: var(--mirai-encre-2);
   }
 
+  // L'avertissement dans le panneau : atteignable au doigt, là où le survol n'existe pas.
   &__avertissement {
-    margin: 12px 0 0;
-    font-size: 11px;
-    line-height: 1.4;
-    color: #666;
+    margin: 0;
+    padding: 10px 14px;
+    background: var(--mirai-beta-fond);
+    border-bottom: 1px solid var(--mirai-beta-ligne);
+    color: var(--mirai-beta-encre);
+    font-size: 12px;
+    line-height: 1.45;
+
+    b {
+      letter-spacing: 0.04em;
+    }
   }
 
   &__titre {
-    margin-top: 16px;
-    padding-bottom: 6px;
-    border-bottom: 1px solid #eee;
-    font-size: 11px;
-    font-weight: 700;
+    padding: 10px 14px 4px;
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    letter-spacing: 0.04em;
-    color: #666;
+    color: var(--mirai-encre-2);
   }
 
   &__liste {
-    margin: 4px 0 0;
-    padding: 0;
+    margin: 0;
+    padding: 0 0 8px;
     list-style: none;
-
-    li {
-      margin: 0;
-    }
 
     a,
     .mirai-services__inactif {
       display: flex;
-      flex-direction: column;
-      padding: 7px 8px;
-      border-radius: 4px;
-      font-size: 13px;
-      font-weight: 600;
-      line-height: 1.2;
+      align-items: baseline;
+      gap: 8px;
+      padding: 7px 14px;
+      border-left: 3px solid transparent;
+      color: var(--mirai-encre);
+      font-size: 13.5px;
       text-decoration: none;
-      color: inherit;
     }
 
     a:hover {
-      background: #f2f6ff;
+      background: var(--mirai-survol);
+      border-left-color: var(--mirai-bleu);
+    }
+
+    a:focus-visible {
+      outline: 2px solid var(--mirai-bleu);
+      outline-offset: -2px;
     }
   }
 
   &__inactif {
-    color: #929292;
+    color: var(--mirai-encre-2);
     cursor: default;
   }
 
+  &__ici {
+    background: var(--mirai-survol);
+    border-left-color: var(--mirai-rouge) !important;
+    font-weight: 600;
+    color: var(--mirai-encre);
+  }
+
   &__note {
-    margin-top: 2px;
+    color: var(--mirai-encre-2);
     font-size: 11px;
-    font-weight: 400;
-    color: #666;
+    white-space: nowrap;
   }
 
   // Même règle que la gaufre qu'il remplace : l'en-tête n'a pas la place sur mobile.
@@ -152,18 +240,23 @@ $tablet: map.get($themes, "default", "globals", "breakpoints", "tablet");
 }
 
 /* Le panneau est posé sur `document.body` — il n'est donc PAS imbriqué dans
-   `.mirai-services`. Sa position vient du composant, calculée depuis le bouton. */
+   `.mirai-services`. Sa position vient du composant, calculée depuis le bouton.
+
+   La barre du haut est en `position: fixed` sans `z-index`, ce qui crée un contexte
+   d'empilement : tout ce qui est peint dedans reste au niveau 0 de la racine, sous le
+   contenu de la page qui vient après dans le document. Aucune valeur de `z-index` sur le
+   panneau n'y changerait quoi que ce soit — elle ne classe qu'à l'intérieur du contexte.
+   Sortir du contexte est la seule chose qui marche, et c'est ce que fait le socle aussi. */
 .mirai-services__panneau {
   position: fixed;
   z-index: 1100; // au-dessus du panneau latéral mobile du kit d'interface (999)
-  width: 320px;
-  max-width: calc(100vw - 2rem);
-  padding: 16px;
-  background: #ffffff;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  box-shadow: 0 6px 24px rgb(0 0 0 / 12%);
-  color: #161616;
+  width: 296px;
+  max-width: calc(100vw - 24px);
+  overflow: hidden;
+  background: var(--mirai-surface);
+  border: 1px solid var(--mirai-ligne);
+  box-shadow: 0 4px 18px rgb(0 0 0 / 14%);
+  color: var(--mirai-encre);
   text-align: left;
 
   &[hidden] {

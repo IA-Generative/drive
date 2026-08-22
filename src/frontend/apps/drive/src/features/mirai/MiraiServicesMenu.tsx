@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { useConfig } from "@/features/config/ConfigProvider";
-import { MarianneFlag } from "./MinistereInterieurLogo";
+import { MarianneEmblem } from "./MarianneEmblem";
 import { lireMenu, serviceCourant } from "./services";
 
 /**
@@ -124,9 +124,11 @@ export const MiraiServicesMenu = () => {
       hidden={!ouvert}
     >
       <div className="mirai-services__entete">
-        <MarianneFlag className="mirai-services__flag" />
+        <MarianneEmblem size={32} />
         <div className="mirai-services__rf">
-          République Française
+          République
+          <br />
+          Française
           <span className="mirai-services__ministere">
             Ministère de l&apos;Intérieur
           </span>
@@ -134,7 +136,9 @@ export const MiraiServicesMenu = () => {
       </div>
 
       {menu.warning && (
-        <p className="mirai-services__avertissement">{menu.warning}</p>
+        <p className="mirai-services__avertissement">
+          <b>MirAI Next Beta</b> — {menu.warning}
+        </p>
       )}
 
       <div className="mirai-services__titre">Les autres services</div>
@@ -144,7 +148,10 @@ export const MiraiServicesMenu = () => {
           if (service.host === ici) {
             return (
               <li key={service.host}>
-                <span className="mirai-services__inactif" aria-current="page">
+                <span
+                  className="mirai-services__inactif mirai-services__ici"
+                  aria-current="page"
+                >
                   {service.name}
                   <span className="mirai-services__note">vous êtes ici</span>
                 </span>
@@ -192,6 +199,11 @@ export const MiraiServicesMenu = () => {
         title={menu.warning || undefined}
         onClick={() => setOuvert((o) => !o)}
       >
+        <MarianneEmblem size={22} />
+        <span className="mirai-services__pastille">
+          <span className="mirai-services__nom">MirAI</span> Next{" "}
+          <span className="mirai-services__beta">Beta</span>
+        </span>
         <GrilleIcon />
       </button>
 
