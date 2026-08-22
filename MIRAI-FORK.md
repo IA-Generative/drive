@@ -1,8 +1,9 @@
 # Ce fork et son écart avec l'amont
 
 Fork de `suitenumerique/drive`, utilisé pour servir une instance « Mes fichiers » exploitée
-par MirAI. Ce fichier est le point d'entrée à lire **avant** de remonter le fork sur une
-nouvelle version de l'amont : il dit ce qui diverge, pourquoi, et comment rejouer.
+par le ministère de l'Intérieur dans le cadre de MirAI. Ce fichier est le point d'entrée à
+lire **avant** de remonter le fork sur une nouvelle version de l'amont : il dit ce qui
+diverge, pourquoi, et comment rejouer.
 
 Il vit à la racine, dans un fichier que l'amont ne touchera jamais — il survit donc à tous
 les rebases.
@@ -15,11 +16,11 @@ les rebases.
 | Remontée le | 2026-08-22 |
 | Base précédente | `v0.18.0-preprod` (`3293ce52`), soit 186 commits de retard |
 
-## Les deux écarts
+## Les trois écarts
 
-Le fork ne porte que **deux** modifications de fond. Tout le reste de son historique est
-constitué de commits qui s'annulent entre eux (une configuration de déploiement ajoutée
-puis retirée, partie vivre ailleurs) et ne laisse aucune trace dans le diff.
+Tout le reste de l'historique du fork est constitué de commits qui s'annulent entre eux
+(une configuration de déploiement ajoutée puis retirée, partie vivre ailleurs) et ne laisse
+aucune trace dans le diff.
 
 ### 1. `🐛(media-auth)` — retirer les paramètres `X-Amz-*` avant la re-signature SigV4
 
@@ -40,15 +41,43 @@ Le correctif tronque l'URL à son chemin avant de construire l'`AWSRequest`.
 **Avant de remonter** : vérifier si l'amont a corrigé la fonction entre-temps. Si oui, ce
 patch disparaît. Au 2026-08-22, ce n'est pas le cas.
 
-### 2. `✨(frontend)` — le badge « by MirAI » dans l'en-tête
+### 2. `✨(frontend)` — le badge « by MirAI »
 
 Une pilule blanche ancrée à droite du logo, avec une queue de bulle qui pointe vers lui.
 Masquée sous le breakpoint tablette, où l'en-tête n'a pas de place à perdre.
 
-Trois fichiers dans `src/frontend/apps/drive/src/features/layouts/components/header/` :
-un `MiraiBadge.tsx` autonome (7 lignes, aucun import), un import et une ligne dans
-`Header.tsx`, un bloc de styles dans `index.scss`. Volontairement minuscule et sans
-dépendance, pour se reposer sans conflit à chaque remontée.
+`MiraiBadge.tsx` (7 lignes, aucun import) dans
+`src/frontend/apps/drive/src/features/layouts/components/header/`, monté à **deux**
+endroits : l'en-tête de l'application (`Header.tsx`) et l'en-tête de la page d'accueil
+publique (`pages/index.tsx`), qui a sa propre barre. Styles dans `header/index.scss`.
+
+### 3. `✨(frontend)` — l'habillage MirAI
+
+Trois changements qui vont ensemble : cette instance n'est pas une instance de LaSuite, et
+son interface ne doit pas prétendre le contraire.
+
+- **Le menu des services.** La gaufre LaSuite listait Tchap, Docs, Visio, Grist… — des
+  services dont cette instance ne fait pas partie. `Gaufre.tsx` rend désormais le menu des
+  services MirAI (`features/mirai/`). Le remplacement est fait dans `Gaufre.tsx` plutôt
+  que chez ses appelants : l'en-tête et l'explorateur le montent tous deux, et tout
+  appelant futur suivra sans y penser. Le widget d'origine se chargeait depuis un domaine
+  externe ; le menu MirAI est servi par l'application. Une dépendance réseau de moins.
+- **Le bloc-marque.** « GOUVERNEMENT » devient « Ministère de l'Intérieur ». Le drapeau et
+  la Marianne sont repris **tels quels** de `assets/logo-gouv.svg`, l'asset de l'amont :
+  mêmes tracés, mêmes couleurs, aucun redessin. Seuls le libellé et la devise changent, et
+  ils sont du vrai texte — ils héritent de la police Marianne chargée par le kit
+  d'interface et se lisent au lecteur d'écran.
+- **Le texte d'accueil.** `home.subtitle` dit maintenant que l'instance est gérée par le
+  ministère de l'Intérieur dans le cadre de MirAI, dans les trois langues du fichier de
+  traduction, et ne promet plus la synchronisation avec « toutes les applications
+  LaSuite ».
+
+> **La liste des services est un miroir, et c'est une dette.** Elle vit dans
+> `features/mirai/services.ts` alors que la liste qui fait foi est celle du socle. Deux
+> listes à tenir synchronisées finissent toujours par diverger. Ce doublon n'existe que
+> parce que Drive ne sait pas encore charger le fichier d'habillage commun ; le jour où ce
+> fichier devient autonome, `features/mirai/` disparaît au profit de lui. C'est écrit dans
+> le prompt de portage archivé côté privé.
 
 ## Remonter sur une nouvelle version de l'amont
 
@@ -62,27 +91,50 @@ git rebase main
 Ne jamais rebaser en laissant du travail non commité : le badge a vécu des mois en
 modification non suivie, à un `git checkout` malheureux de sa disparition.
 
-Contrôle d'arrivée — le diff avec l'amont doit tenir en **six fichiers**, pas un de plus :
+Contrôle d'arrivée — le diff avec l'amont doit tenir dans cette liste, pas un fichier de
+plus :
 
 ```bash
 git diff main..HEAD --stat
-#  .gitignore
-#  MIRAI-FORK.md                                    (ce fichier)
-#  src/backend/core/api/utils.py
-#  .../components/header/Header.tsx
-#  .../components/header/MiraiBadge.tsx
-#  .../components/header/index.scss
 ```
 
-Un septième fichier signifie qu'un écart s'est glissé sans être documenté ici : le
-documenter, ou le retirer.
+| Fichier | Écart |
+|---|---|
+| `MIRAI-FORK.md` | ce fichier |
+| `.gitignore` | `deploy/` hors du dépôt public |
+| `src/backend/core/api/utils.py` | correctif SigV4 |
+| `.../header/MiraiBadge.tsx` | le badge (nouveau) |
+| `.../header/Header.tsx` | montage du badge |
+| `.../header/index.scss` | styles du badge |
+| `pages/index.tsx` | bloc-marque + badge sur l'accueil |
+| `pages/index.scss` | règle mobile du bloc-marque |
+| `.../gaufre/Gaufre.tsx` | menu MirAI à la place de la gaufre |
+| `features/mirai/` | menu, bloc-marque, liste des services (nouveau) |
+| `features/i18n/translations.json` | texte d'accueil, 3 langues |
+| `styles/globals.scss` | branchement de `mirai.scss` |
+
+Un fichier hors de cette liste signifie qu'un écart s'est glissé sans être documenté ici :
+le documenter, ou le retirer.
+
+**Les fichiers les plus exposés au conflit** sont ceux que l'amont fait vivre :
+`pages/index.tsx`, `translations.json` et `globals.scss`. Les nôtres (`features/mirai/`,
+`MiraiBadge.tsx`) ne bougent jamais sous nos pieds. Si l'amont refond sa page d'accueil,
+c'est là qu'il faudra retravailler — pas ailleurs.
 
 ## Points ouverts
 
 - **Le badge est candidat au retrait.** Un encart de services, portant sa propre pastille
   MirAI, doit arriver sur Drive. Le jour où il arrive, deux marques MirAI coexisteraient à
-  l'écran. Le badge disparaîtra vraisemblablement à ce moment-là. La décision n'est pas
-  prise.
+  l'écran — trois avec le bloc-marque du ministère. Le badge disparaîtra vraisemblablement
+  à ce moment-là. La décision n'est pas prise.
+- **Le menu MirAI est une réimplémentation**, pas l'encart du socle. Voir l'encadré
+  ci-dessus : c'est un état transitoire assumé, pas une cible.
+- **La liste des services est publiée avec ce dépôt.** Elle nomme les sous-domaines de
+  tous les services MirAI, y compris ceux marqués « bientôt » — donc une partie de la
+  feuille de route. Les mêmes noms sont déjà servis publiquement par l'habillage du socle,
+  et le navigateur doit de toute façon les recevoir pour afficher des liens ; mais si ce
+  n'est pas voulu, la liste doit sortir du code et arriver par la configuration au
+  démarrage. À trancher avant le prochain push.
 - **Graphie.** « MirAI » depuis le 2026-08-22, aligné sur le reste de la plateforme. Une
   version antérieure du badge écrivait « MiRAI » : si ce rendu traîne encore quelque part,
   c'est lui qu'il faut corriger.
