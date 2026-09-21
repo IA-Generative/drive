@@ -839,7 +839,7 @@
       },
       "home": {
         "title": "Stocker et partager facilement",
-        "subtitle": "Cette instance est gérée par le ministère de l’Intérieur dans le cadre de MirAI. Un stockage performant et sécurisé pour les équipes publiques : hébergement en France, sécurité renforcée, et accès direct aux autres services MirAI.",
+        "subtitle": "Mes fichiers stocke vos documents de travail et vous permet de les partager avec d’autres agents du ministère. Cette instance est gérée par le ministère de l’Intérieur dans le cadre de la bêta MirAI, avec un accès direct aux autres services MirAI.",
         "main_button": "Se connecter",
         "more": "En savoir plus"
       },

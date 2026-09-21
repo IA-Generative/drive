@@ -118,6 +118,12 @@ l'identifiant du retour dans son message de commit.
 - **F2 — « Récents » et les images d'Imagerie.** Imagerie n'écrit pas dans Drive. Le
   texte d'état vide de « Récents » (`explorer.grid.empty.cta.recent`, français
   seulement) le dit et donne le chemin : télécharger depuis Imagerie, puis importer.
+- **F6 — écran d'entrée.** `home.subtitle` (français) commence par ce que fait
+  l'application — stocker ses documents de travail et les partager entre agents du
+  ministère — puis dit qui la gère. Les qualificatifs invérifiables (« performant »,
+  « sécurité renforcée », « hébergement en France ») sont partis ; aucune intégration
+  avec Docs n'existe, la phrase n'en parle pas. L'anglais et le néerlandais gardent le
+  texte de l'écart 3.
 
 ## Remonter sur une nouvelle version de l'amont
 
