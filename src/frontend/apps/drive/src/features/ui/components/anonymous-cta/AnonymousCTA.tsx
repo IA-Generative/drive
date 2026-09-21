@@ -6,7 +6,10 @@ import { useTranslation } from "react-i18next";
 export const AnonymousCTA = () => {
   const { t } = useTranslation();
   const { config } = useConfig();
-  const tryOutUrl = config.FRONTEND_EXTERNAL_HOME_URL ?? "/";
+  // MirAI : sans FRONTEND_EXTERNAL_HOME_URL, l'amont renvoyait vers « / » —
+  // sur l'accueil, le bouton rechargeait la page et ne faisait rien. Il mène
+  // désormais au même parcours que « Se connecter » : un seul chemin d'entrée.
+  const tryOutUrl = config.FRONTEND_EXTERNAL_HOME_URL;
   return (
     <div className="anonymous-cta">
       <div className="anonymous-cta__separator" />
@@ -14,6 +17,7 @@ export const AnonymousCTA = () => {
         variant="tertiary"
         size="small"
         href={tryOutUrl}
+        onClick={tryOutUrl ? undefined : () => login()}
         id="anonymous-cta-try-out"
         data-testid="anonymous-cta-try-out"
       >

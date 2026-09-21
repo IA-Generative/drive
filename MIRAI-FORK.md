@@ -129,6 +129,12 @@ l'identifiant du retour dans son message de commit.
   « sécurité renforcée », « hébergement en France ») sont partis ; aucune intégration
   avec Docs n'existe, la phrase n'en parle pas. L'anglais et le néerlandais gardent le
   texte de l'écart 3.
+- **T7 — « Essayer maintenant ».** Sans `FRONTEND_EXTERNAL_HOME_URL`, l'amont le faisait
+  pointer vers `/` : sur l'accueil, le bouton rechargeait la page. Il appelle
+  désormais `login()`, comme « Se connecter » (`AnonymousCTA.tsx`) ; réglage posé, il
+  suit toujours le lien. Ne **pas** poser `FRONTEND_EXTERNAL_HOME_URL` pour y remédier :
+  il redirige tout l'accueil. Le test e2e `url-file-preview.spec.ts` suit. « En savoir
+  plus », lui, prend `FRONTEND_MORE_LINK`, renseigné au déploiement.
 
 ## Remonter sur une nouvelle version de l'amont
 
@@ -169,6 +175,8 @@ git diff main..HEAD --stat
 | `.../modals/ExplorerCreateFileModal.tsx` | F1 : avertissement « fichier vide » |
 | `features/ui/preview/CustomFilesPreview.tsx` | F1 : mention dans l'en-tête de l'aperçu |
 | `styles/globals.scss` | branchement de `mirai.scss` |
+| `.../anonymous-cta/AnonymousCTA.tsx` | T7 : « Essayer maintenant » appelle `login()` |
+| `apps/e2e/.../url-file-preview.spec.ts` | T7 : le test suit |
 
 Un fichier hors de cette liste signifie qu'un écart s'est glissé sans être documenté ici :
 le documenter, ou le retirer.
