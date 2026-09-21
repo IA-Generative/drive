@@ -982,7 +982,7 @@
             "caption_no_create": "Vous n'avez pas les droits pour ajouter des fichiers",
             "cta": {
               "default": "Importez ou créez des fichiers et dossiers ici.",
-              "recent": "Les fichiers et dossiers apparaîtront ici dans l'ordre de leur dernière modification.",
+              "recent": "Les fichiers et dossiers apparaîtront ici dans l'ordre de leur dernière modification. Les images créées dans Imagerie ne sont pas encore enregistrées ici : téléchargez-les depuis Imagerie puis importez-les.",
               "shared_with_me": "Les fichiers et dossiers partagés avec vous apparaîtront ici.",
               "favorites": "Les fichiers et dossiers favoris apparaîtront ici.",
               "trash": "Les fichiers et dossiers supprimés apparaîtront ici.",

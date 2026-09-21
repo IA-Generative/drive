@@ -115,6 +115,9 @@ l'identifiant du retour dans son message de commit.
   `features/mirai/EnConstruction.tsx` : `grep EnConstruction` retrouve tous ses usages.
   **Le jour où un éditeur est branché**, retirer le sous-texte et le paragraphe de la
   fenêtre ; l'aperçu, lui, se tait seul (il lit `is_wopi_supported`).
+- **F2 — « Récents » et les images d'Imagerie.** Imagerie n'écrit pas dans Drive. Le
+  texte d'état vide de « Récents » (`explorer.grid.empty.cta.recent`, français
+  seulement) le dit et donne le chemin : télécharger depuis Imagerie, puis importer.
 
 ## Remonter sur une nouvelle version de l'amont
 
