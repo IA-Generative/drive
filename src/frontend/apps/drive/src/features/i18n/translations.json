@@ -362,7 +362,8 @@
             "file": {
               "doc": "New text document",
               "powerpoint": "New slides",
-              "calc": "New spreadsheet"
+              "calc": "New spreadsheet",
+              "empty_notice": "Under construction — empty file to download: online editing is not available yet"
             }
           },
           "import": {
@@ -504,7 +505,8 @@
               "label": "File name",
               "placeholder": "Enter file name",
               "cancel": "Cancel",
-              "submit": "Create"
+              "submit": "Create",
+              "empty_notice": "The file will be created empty. Online editing is not available yet: download the file to edit it on your computer."
             }
           },
           "upload": {
@@ -705,6 +707,11 @@
         "title": "User reconciliation",
         "success": "Your email address has been confirmed. To complete the merge of your accounts, please click the confirmation links sent to all the addresses you provided.",
         "error": "An error occurred during email validation."
+      },
+      "mirai": {
+        "en_construction": "Under construction",
+        "no_online_edit": "Online editing is not available yet: download the file to open and edit it on your computer.",
+        "no_online_edit_short": "Online editing not available yet"
       }
     }
   },
@@ -1084,7 +1091,8 @@
             "file": {
               "doc": "Nouveau document texte",
               "powerpoint": "Nouvelles diapositives",
-              "calc": "Nouveau tableau de calcul"
+              "calc": "Nouveau tableau de calcul",
+              "empty_notice": "En construction — fichier vide à télécharger : l'édition en ligne n'est pas encore disponible"
             },
             "workspace": "Nouvel espace"
           },
@@ -1213,7 +1221,8 @@
               "label": "Nom du fichier",
               "placeholder": "Entrez le nom du fichier",
               "cancel": "Annuler",
-              "submit": "Créer"
+              "submit": "Créer",
+              "empty_notice": "Le fichier sera créé vide. L'édition en ligne n'est pas encore disponible : téléchargez le fichier pour le modifier sur votre poste."
             }
           },
           "upload": {
@@ -1414,6 +1423,11 @@
         "title": "Réconciliation de comptes",
         "success": "Votre adresse e-mail a été confirmée. Pour finaliser la fusion de vos comptes, cliquez sur les liens de confirmation envoyés à toutes les adresses que vous avez fournies.",
         "error": "Une erreur s'est produite lors de la validation de l'e-mail."
+      },
+      "mirai": {
+        "en_construction": "En construction",
+        "no_online_edit": "L'édition en ligne n'est pas encore disponible : téléchargez le fichier pour l'ouvrir et le modifier sur votre poste.",
+        "no_online_edit_short": "Édition en ligne pas encore disponible"
       }
     }
   },
@@ -1779,7 +1793,8 @@
             "file": {
               "doc": "Nieuw tekstdocument",
               "powerpoint": "Nieuwe presentatie",
-              "calc": "Nieuwe spreadsheet"
+              "calc": "Nieuwe spreadsheet",
+              "empty_notice": "In aanbouw — leeg bestand om te downloaden: online bewerken is nog niet beschikbaar"
             },
             "workspace": "Nieuwe werkruimte"
           },
@@ -1922,7 +1937,8 @@
               "label": "Bestandsnaam",
               "placeholder": "Voer bestandsnaam in",
               "cancel": "Annuleren",
-              "submit": "Maken"
+              "submit": "Maken",
+              "empty_notice": "Het bestand wordt leeg aangemaakt. Online bewerken is nog niet beschikbaar: download het bestand om het op uw computer te bewerken."
             }
           },
           "upload": {
@@ -2123,6 +2139,11 @@
         "title": "Accountreconciliatie",
         "success": "Uw e-mailadres is bevestigd. Klik op de bevestigingslinks die naar alle door u opgegeven adressen zijn verzonden om het samenvoegen van uw accounts te voltooien.",
         "error": "Er is een fout opgetreden tijdens de e-mailvalidatie."
+      },
+      "mirai": {
+        "en_construction": "In aanbouw",
+        "no_online_edit": "Online bewerken is nog niet beschikbaar: download het bestand om het op uw computer te openen en te bewerken.",
+        "no_online_edit_short": "Online bewerken nog niet beschikbaar"
       }
     }
   }

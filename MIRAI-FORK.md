@@ -16,7 +16,7 @@ les rebases.
 | Remontée le | 2026-08-22 |
 | Base précédente | `v0.18.0-preprod` (`3293ce52`), soit 186 commits de retard |
 
-## Les trois écarts
+## Les quatre écarts
 
 Tout le reste de l'historique du fork est constitué de commits qui s'annulent entre eux
 (une configuration de déploiement ajoutée puis retirée, partie vivre ailleurs) et ne laisse
@@ -98,6 +98,24 @@ son interface ne doit pas prétendre le contraire.
 > minuscule fait échouer la lecture, le réglage retombe à vide, et le menu disparaît sans
 > que rien ne dise pourquoi.
 
+### 4. `✨(frontend)` — dire ce qui n'est pas encore branché (retours de la bêta)
+
+Consigne de la bêta : ne retirer **aucune** fonction. Ce qui n'est pas branché sur cette
+instance reste à l'écran, mais dit ce qu'il fait vraiment. Chaque point porte
+l'identifiant du retour dans son message de commit.
+
+- **F1 — « Nouveau » document texte, diapositives, tableau.** Aucun éditeur en ligne
+  n'est branché (`WOPI_CLIENTS` vide) : le fichier est créé **vide** depuis un modèle,
+  et son aperçu ne propose que « Télécharger ». Les trois entrées restent ; elles
+  portent un sous-texte « En construction — fichier vide à télécharger »
+  (`useCreateMenuItems.tsx`), la fenêtre de création le redit avec la pastille
+  (`ExplorerCreateFileModal.tsx`), et l'en-tête de l'aperçu d'un document bureautique
+  sans éditeur affiche « Édition en ligne pas encore disponible », avec une infobulle
+  (`CustomFilesPreview.tsx`). La pastille est un seul composant,
+  `features/mirai/EnConstruction.tsx` : `grep EnConstruction` retrouve tous ses usages.
+  **Le jour où un éditeur est branché**, retirer le sous-texte et le paragraphe de la
+  fenêtre ; l'aperçu, lui, se tait seul (il lit `is_wopi_supported`).
+
 ## Remonter sur une nouvelle version de l'amont
 
 ```bash
@@ -130,9 +148,12 @@ git diff main..HEAD --stat
 | `pages/index.tsx` | bloc-marque + badge sur l'accueil |
 | `pages/index.scss` | règle mobile du bloc-marque |
 | `.../gaufre/Gaufre.tsx` | menu des services à la place de la gaufre |
-| `features/mirai/` | menu, bloc-marque, lecture du réglage (nouveau) |
+| `features/mirai/` | menu, bloc-marque, lecture du réglage, pastille « En construction » (nouveau) |
 | `features/drivers/types.ts` | type du réglage |
-| `features/i18n/translations.json` | texte d'accueil, 3 langues |
+| `features/i18n/translations.json` | texte d'accueil et libellés de l'écart 4, 3 langues |
+| `.../hooks/useCreateMenuItems.tsx` | F1 : sous-texte « En construction » |
+| `.../modals/ExplorerCreateFileModal.tsx` | F1 : avertissement « fichier vide » |
+| `features/ui/preview/CustomFilesPreview.tsx` | F1 : mention dans l'en-tête de l'aperçu |
 | `styles/globals.scss` | branchement de `mirai.scss` |
 
 Un fichier hors de cette liste signifie qu'un écart s'est glissé sans être documenté ici :

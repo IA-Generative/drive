@@ -270,3 +270,52 @@ $tablet: map.get($themes, "default", "globals", "breakpoints", "tablet");
     display: none;
   }
 }
+
+/* ---- Pastille « En construction » ------------------------------------------------ */
+
+// Ce qui n'est pas encore branché reste à l'écran, marqué. Voir `EnConstruction.tsx`.
+.mirai-en-construction {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 4px;
+  height: 22px;
+  padding: 0 8px;
+  background: #fff4e5;
+  border: 1px solid #f0c38a;
+  border-radius: 11px;
+  color: #6e4400;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+
+  .material-icons {
+    font-size: 14px;
+  }
+}
+
+.mirai-en-construction-notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+// Dans l'en-tête de l'aperçu : la pastille, et une phrase courte que l'infobulle complète.
+.custom-files-preview-no-online-edit {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-right: 8px;
+  font-size: 14px;
+  white-space: nowrap;
+
+  @media (max-width: $tablet) {
+    &__label {
+      display: none;
+    }
+  }
+}
