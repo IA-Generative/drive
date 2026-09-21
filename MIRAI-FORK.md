@@ -118,6 +118,11 @@ l'identifiant du retour dans son message de commit.
 - **F2 — « Récents » et les images d'Imagerie.** Imagerie n'écrit pas dans Drive. Le
   texte d'état vide de « Récents » (`explorer.grid.empty.cta.recent`, français
   seulement) le dit et donne le chemin : télécharger depuis Imagerie, puis importer.
+- **F4 — Mes fichiers et Mon assistant.** Aucun lien entre les deux. Une phrase sous
+  les boutons de l'écran d'entrée (`home.assistant_hint`) dit comment faire :
+  télécharger, puis joindre à la conversation. Elle est posée **dans**
+  `.c__hero__buttons` pour ne pas réindenter `pages/index.tsx` ; `mirai.scss` fait
+  passer cette ligne flex à la ligne.
 - **F6 — écran d'entrée.** `home.subtitle` (français) commence par ce que fait
   l'application — stocker ses documents de travail et les partager entre agents du
   ministère — puis dit qui la gère. Les qualificatifs invérifiables (« performant »,
@@ -154,7 +159,7 @@ git diff main..HEAD --stat
 | `.../header/MiraiBadge.tsx` | le badge (nouveau) |
 | `.../header/Header.tsx` | montage du badge |
 | `.../header/index.scss` | styles du badge |
-| `pages/index.tsx` | bloc-marque + badge sur l'accueil |
+| `pages/index.tsx` | bloc-marque + badge sur l'accueil, phrase F4 |
 | `pages/index.scss` | règle mobile du bloc-marque |
 | `.../gaufre/Gaufre.tsx` | menu des services à la place de la gaufre |
 | `features/mirai/` | menu, bloc-marque, lecture du réglage, pastille « En construction » (nouveau) |

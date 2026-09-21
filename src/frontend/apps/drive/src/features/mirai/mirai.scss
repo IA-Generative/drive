@@ -319,3 +319,19 @@ $tablet: map.get($themes, "default", "globals", "breakpoints", "tablet");
     }
   }
 }
+
+/* ---- Écran d'entrée : phrase sous les boutons ------------------------------------ */
+
+// Posée dans `.c__hero__buttons` (une ligne flex) pour ne pas réindenter la page
+// d'accueil de l'amont : elle passe à la ligne et prend toute la largeur.
+.drive__home .c__hero__buttons {
+  flex-wrap: wrap;
+}
+
+.mirai-home-hint {
+  flex-basis: 100%;
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--c--contextuals--content--semantic--neutral--secondary);
+}

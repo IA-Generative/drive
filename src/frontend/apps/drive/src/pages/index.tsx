@@ -138,6 +138,8 @@ const HomePageContent = () => {
                   {t("home.more")}
                 </Button>
               </div>
+              {/* MirAI : aucun lien direct entre Mes fichiers et Mon assistant. */}
+              <p className="mirai-home-hint">{t("home.assistant_hint")}</p>
             </div>
           }
         />
