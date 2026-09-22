@@ -149,13 +149,15 @@ test("Public file preview — anonymous user sees AnonymousCTA", async ({
   await expect(anonPage.getByTestId("anonymous-cta-try-out")).toBeVisible();
   await expect(anonPage.getByTestId("my-files-cta")).not.toBeVisible();
 
-  // Default fallback: try-out points to "/"
-  await expect(anonPage.getByTestId("anonymous-cta-try-out")).toHaveAttribute(
-    "href",
-    "/",
-  );
-  await anonPage.getByTestId("anonymous-cta-try-out").click();
-  await anonPage.waitForURL((url) => url.pathname === "/");
+  // MirAI: without FRONTEND_EXTERNAL_HOME_URL, try-out starts the same login
+  // flow as the login button (upstream pointed to "/", a no-op on the home page).
+  await expect(
+    anonPage.getByTestId("anonymous-cta-try-out"),
+  ).not.toHaveAttribute("href");
+  await Promise.all([
+    anonPage.waitForRequest((req) => req.url().includes("/authenticate/")),
+    anonPage.getByTestId("anonymous-cta-try-out").click(),
+  ]);
 
   // Reload preview to test the login button.
   await anonPage.goto(fileUrl);

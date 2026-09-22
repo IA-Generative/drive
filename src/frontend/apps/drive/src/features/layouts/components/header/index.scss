@@ -9,6 +9,65 @@ $tablet: map.get($themes, "default", "globals", "breakpoints", "tablet");
   }
 }
 
+.mirai-badge {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  height: 22px;
+  padding: 0 8px;
+  background: #ffffff;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  color: #374151;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.01em;
+  user-select: none;
+  white-space: nowrap;
+
+  // colle la bulle au logo (annule le gap: 2rem du parent .drive__header__left)
+  // et laisse la queue mordre sur le bord droit du logo.
+  margin-left: calc(-2rem + 6px);
+
+  // tail (queue de la bulle, pointe vers le logo, à gauche)
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 100%;
+    width: 0;
+    height: 0;
+    border-style: solid;
+  }
+
+  &::before {
+    margin-top: -5px;
+    border-width: 5px 6px 5px 0;
+    border-color: transparent #d1d5db transparent transparent;
+  }
+
+  &::after {
+    margin-top: -4px;
+    margin-right: -1px;
+    border-width: 4px 5px 4px 0;
+    border-color: transparent #ffffff transparent transparent;
+  }
+
+  &__name {
+    margin-left: 3px;
+    font-style: italic;
+    font-weight: 700;
+    color: #1f2937;
+    letter-spacing: 0.02em;
+  }
+
+  @media (max-width: $tablet) {
+    display: none;
+  }
+}
+
 .c__header__right {
   display: flex;
   align-items: center;

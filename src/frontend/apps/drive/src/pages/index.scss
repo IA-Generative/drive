@@ -70,7 +70,9 @@ $tablet: map.get($themes, "default", "globals", "breakpoints", "tablet");
 
     .c__header {
       .drive__header__left {
-        img:first-child {
+        // Le bloc-marque de l'État ne tient pas sur mobile : c'était déjà le cas quand
+        // il était servi par une <img>, il l'est toujours en composant.
+        .mirai-ministere {
           display: none;
         }
       }

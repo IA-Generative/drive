@@ -189,7 +189,7 @@ export type User = {
   column_preferences?: ColumnPreferences | null;
 };
 
-export type UserLight = Pick<User, "id" | "full_name" | "short_name">
+export type UserLight = Pick<User, "id" | "full_name" | "short_name">;
 
 export type LocalizedThemeCustomization<T> = {
   default: T;
@@ -227,11 +227,22 @@ export type ApiConfig = {
   };
   FRONTEND_THEME?: string;
   FRONTEND_HIDE_GAUFRE?: boolean;
+  FRONTEND_MIRAI_SERVICES?: {
+    domain?: string;
+    current?: string;
+    warning?: string;
+    services?: {
+      name: string;
+      host: string;
+      about?: string;
+      online?: boolean;
+    }[];
+  };
   FRONTEND_SILENT_LOGIN_ENABLED?: boolean;
   FRONTEND_EXTERNAL_HOME_URL?: string;
   FRONTEND_RELEASE_NOTE_ENABLED?: boolean;
   FRONTEND_ENTITLEMENTS_DISCLAIMERS?: {
-    "cannot_upload"?: {
+    cannot_upload?: {
       enabled: boolean;
       showPotentialOperators: boolean;
     };

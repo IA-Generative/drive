@@ -43,10 +43,14 @@ env.bak/
 venv.bak/
 env.d/development/*.local
 env.d/terraform
+src/helm/env.d/miraiku/
 
 # Docker
 compose.override.yml
 docker/auth/*.local
+
+# Deploy (local to the operator's machine, cf. MIRAI-FORK.md)
+deploy/*
 
 # npm
 node_modules

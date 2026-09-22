@@ -10,11 +10,13 @@ import { useIsMinimalLayout } from "@/utils/useLayout";
 import { Feedback } from "@/features/feedback/Feedback";
 import { Gaufre } from "@/features/ui/components/gaufre/Gaufre";
 import { UserProfile } from "@/features/ui/components/user/UserProfile";
+import { MiraiBadge } from "./MiraiBadge";
 
 export const HeaderIcon = () => {
   return (
     <div className="drive__header__left">
       <div className="drive__header__logo" />
+      <MiraiBadge />
       <Feedback />
     </div>
   );

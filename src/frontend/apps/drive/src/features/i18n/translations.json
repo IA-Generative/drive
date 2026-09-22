@@ -123,9 +123,10 @@
       },
       "home": {
         "title": "Easy storage and sharing",
-        "subtitle": "A modern, high-performance drive built for French public teams. Sovereign hosting in France, strong security, and seamless sync with all LaSuite apps. On par with the market’s best—without the data trade-offs.",
+        "subtitle": "This instance is operated by the French Ministry of the Interior as part of MirAI. A modern, high-performance drive for public teams: sovereign hosting in France, strong security, and direct access to the other MirAI services.",
         "main_button": "Sign in",
-        "more": "Learn more"
+        "more": "Learn more",
+        "assistant_hint": "To use a document with Mon assistant, download it and attach it to your conversation (a direct link is not available yet)."
       },
       "feedback": {
         "button": "Give feedback",
@@ -362,7 +363,8 @@
             "file": {
               "doc": "New text document",
               "powerpoint": "New slides",
-              "calc": "New spreadsheet"
+              "calc": "New spreadsheet",
+              "empty_notice": "Under construction — empty file to download: online editing is not available yet"
             }
           },
           "import": {
@@ -504,7 +506,8 @@
               "label": "File name",
               "placeholder": "Enter file name",
               "cancel": "Cancel",
-              "submit": "Create"
+              "submit": "Create",
+              "empty_notice": "The file will be created empty. Online editing is not available yet: download the file to edit it on your computer."
             }
           },
           "upload": {
@@ -705,6 +708,11 @@
         "title": "User reconciliation",
         "success": "Your email address has been confirmed. To complete the merge of your accounts, please click the confirmation links sent to all the addresses you provided.",
         "error": "An error occurred during email validation."
+      },
+      "mirai": {
+        "en_construction": "Under construction",
+        "no_online_edit": "Online editing is not available yet: download the file to open and edit it on your computer.",
+        "no_online_edit_short": "Online editing not available yet"
       }
     }
   },
@@ -832,9 +840,10 @@
       },
       "home": {
         "title": "Stocker et partager facilement",
-        "subtitle": "Un stockage performant et sécurisé pour les équipes publiques françaises. Hébergement en France, sécurité renforcée, et synchronisation fluide avec toutes les applications LaSuite. A la hauteur des meilleurs du marché, sans les compromis de données.",
+        "subtitle": "Mes fichiers stocke vos documents de travail et vous permet de les partager avec d’autres agents du ministère. Cette instance est gérée par le ministère de l’Intérieur dans le cadre de la bêta MirAI, avec un accès direct aux autres services MirAI.",
         "main_button": "Se connecter",
-        "more": "En savoir plus"
+        "more": "En savoir plus",
+        "assistant_hint": "Pour utiliser un document avec Mon assistant, téléchargez-le puis joignez-le à votre conversation (lien direct pas encore disponible)."
       },
       "feedback": {
         "button": "Faire un retour",
@@ -975,7 +984,7 @@
             "caption_no_create": "Vous n'avez pas les droits pour ajouter des fichiers",
             "cta": {
               "default": "Importez ou créez des fichiers et dossiers ici.",
-              "recent": "Les fichiers et dossiers apparaîtront ici dans l'ordre de leur dernière modification.",
+              "recent": "Les fichiers et dossiers apparaîtront ici dans l'ordre de leur dernière modification. Les images créées dans Imagerie ne sont pas encore enregistrées ici : téléchargez-les depuis Imagerie puis importez-les.",
               "shared_with_me": "Les fichiers et dossiers partagés avec vous apparaîtront ici.",
               "favorites": "Les fichiers et dossiers favoris apparaîtront ici.",
               "trash": "Les fichiers et dossiers supprimés apparaîtront ici.",
@@ -1084,7 +1093,8 @@
             "file": {
               "doc": "Nouveau document texte",
               "powerpoint": "Nouvelles diapositives",
-              "calc": "Nouveau tableau de calcul"
+              "calc": "Nouveau tableau de calcul",
+              "empty_notice": "En construction — fichier vide à télécharger : l'édition en ligne n'est pas encore disponible"
             },
             "workspace": "Nouvel espace"
           },
@@ -1213,7 +1223,8 @@
               "label": "Nom du fichier",
               "placeholder": "Entrez le nom du fichier",
               "cancel": "Annuler",
-              "submit": "Créer"
+              "submit": "Créer",
+              "empty_notice": "Le fichier sera créé vide. L'édition en ligne n'est pas encore disponible : téléchargez le fichier pour le modifier sur votre poste."
             }
           },
           "upload": {
@@ -1414,6 +1425,11 @@
         "title": "Réconciliation de comptes",
         "success": "Votre adresse e-mail a été confirmée. Pour finaliser la fusion de vos comptes, cliquez sur les liens de confirmation envoyés à toutes les adresses que vous avez fournies.",
         "error": "Une erreur s'est produite lors de la validation de l'e-mail."
+      },
+      "mirai": {
+        "en_construction": "En construction",
+        "no_online_edit": "L'édition en ligne n'est pas encore disponible : téléchargez le fichier pour l'ouvrir et le modifier sur votre poste.",
+        "no_online_edit_short": "Édition en ligne pas encore disponible"
       }
     }
   },
@@ -1541,9 +1557,10 @@
       },
       "home": {
         "title": "Eenvoudige opslag en delen",
-        "subtitle": "Een modern, hoogwaardig platform voor bestandenopslag ontworpen voor Franse publieke teams. Soevereine hosting in Frankrijk, sterke beveiliging en naadloze synchronisatie met alle LaSuite-apps. Even goed als de beste op de markt — zonder concessies op het gebied van data.",
+        "subtitle": "Deze instantie wordt beheerd door het Franse ministerie van Binnenlandse Zaken in het kader van MirAI. Een modern, hoogwaardig platform voor bestandsopslag voor publieke teams: soevereine hosting in Frankrijk, sterke beveiliging en directe toegang tot de andere MirAI-diensten.",
         "main_button": "Inloggen",
-        "more": "Meer informatie"
+        "more": "Meer informatie",
+        "assistant_hint": "Om een document met Mon assistant te gebruiken, downloadt u het en voegt u het toe aan uw gesprek (een directe koppeling is nog niet beschikbaar)."
       },
       "feedback": {
         "button": "Geef feedback",
@@ -1779,7 +1796,8 @@
             "file": {
               "doc": "Nieuw tekstdocument",
               "powerpoint": "Nieuwe presentatie",
-              "calc": "Nieuwe spreadsheet"
+              "calc": "Nieuwe spreadsheet",
+              "empty_notice": "In aanbouw — leeg bestand om te downloaden: online bewerken is nog niet beschikbaar"
             },
             "workspace": "Nieuwe werkruimte"
           },
@@ -1922,7 +1940,8 @@
               "label": "Bestandsnaam",
               "placeholder": "Voer bestandsnaam in",
               "cancel": "Annuleren",
-              "submit": "Maken"
+              "submit": "Maken",
+              "empty_notice": "Het bestand wordt leeg aangemaakt. Online bewerken is nog niet beschikbaar: download het bestand om het op uw computer te bewerken."
             }
           },
           "upload": {
@@ -2123,6 +2142,11 @@
         "title": "Accountreconciliatie",
         "success": "Uw e-mailadres is bevestigd. Klik op de bevestigingslinks die naar alle door u opgegeven adressen zijn verzonden om het samenvoegen van uw accounts te voltooien.",
         "error": "Er is een fout opgetreden tijdens de e-mailvalidatie."
+      },
+      "mirai": {
+        "en_construction": "In aanbouw",
+        "no_online_edit": "Online bewerken is nog niet beschikbaar: download het bestand om het op uw computer te openen en te bewerken.",
+        "no_online_edit_short": "Online bewerken nog niet beschikbaar"
       }
     }
   }

@@ -10,6 +10,7 @@ import { RhfInput } from "@/features/forms/components/RhfInput";
 import { useMutationCreateFileFromTemplate } from "../../hooks/useMutations";
 import { useRouter } from "next/router";
 import { useSetSelectedItems } from "../../stores/selectionStore";
+import { EnConstructionNotice } from "@/features/mirai/EnConstruction";
 
 type Inputs = {
   filename: string;
@@ -89,6 +90,12 @@ export const ExplorerCreateFileModal = (
           id="create-file-form"
           className="mt-s"
         >
+          {/* MirAI : aucun éditeur en ligne n'est branché, le fichier créé est vide. */}
+          <div className="mb-s">
+            <EnConstructionNotice>
+              {t("explorer.actions.createFile.modal.empty_notice")}
+            </EnConstructionNotice>
+          </div>
           <RhfInput
             label={t("explorer.actions.createFile.modal.label")}
             fullWidth={true}

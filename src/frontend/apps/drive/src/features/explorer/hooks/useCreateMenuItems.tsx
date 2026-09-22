@@ -97,6 +97,8 @@ export const useCreateMenuItems = ({
             "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
         }),
         label: t("explorer.tree.create.file.doc"),
+        // MirAI : aucun éditeur en ligne n'est branché, le fichier créé est vide.
+        subText: t("explorer.tree.create.file.empty_notice"),
         callback: () => openCreateFileModal(ExplorerCreateFileType.DOC),
       },
       {
@@ -107,6 +109,8 @@ export const useCreateMenuItems = ({
             "application/vnd.openxmlformats-officedocument.presentationml.presentation",
         }),
         label: t("explorer.tree.create.file.powerpoint"),
+        // MirAI : aucun éditeur en ligne n'est branché, le fichier créé est vide.
+        subText: t("explorer.tree.create.file.empty_notice"),
         callback: () => openCreateFileModal(ExplorerCreateFileType.POWERPOINT),
       },
       {
@@ -117,6 +121,8 @@ export const useCreateMenuItems = ({
             "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
         }),
         label: t("explorer.tree.create.file.calc"),
+        // MirAI : aucun éditeur en ligne n'est branché, le fichier créé est vide.
+        subText: t("explorer.tree.create.file.empty_notice"),
         callback: () => openCreateFileModal(ExplorerCreateFileType.CALC),
       },
     );
